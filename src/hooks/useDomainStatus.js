@@ -10,8 +10,8 @@ export const useDomainStatus = ({
   parentHash = namehash(TLD),
 } = {}) => {
   const { address } = useAccount();
-
-  return useReadContract({
+  const is3Digits = /^\d{3}$/.test(label);
+  const hook = useReadContract({
     address: STATUS_CONTRACT_ADDR,
     functionName: 'getDomainDetails',
     abi: abi,
@@ -22,8 +22,10 @@ export const useDomainStatus = ({
       label,
     ],
     query: {
-      enabled: !!label,
+      enabled: is3Digits,
       select: (data) => {
+        data.isPremium = false;
+
         // remove 0x00
         if (data.owner === zeroAddress) {
           data.owner = undefined;
@@ -48,4 +50,18 @@ export const useDomainStatus = ({
       },
     },
   });
+
+  if (!is3Digits) {
+    return {
+      data: {
+        label,
+        isAvailable: false,
+        labelValid: false,
+        publicRegistrationOpen: false,
+      },
+      isLoading: false,
+    };
+  }
+
+  return hook;
 };

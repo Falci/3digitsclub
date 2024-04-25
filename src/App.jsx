@@ -1,26 +1,24 @@
 import { ConnectButton } from './components/button/ConnectButton';
+import cn from 'classnames';
+import avatar from './assets/avatarLight.svg';
 import brandLogo from './assets/brand.png';
 import hnsLogo from './assets/hns.id.png';
 import { Search } from './components/search/Search';
-import {
-  HERO_TEXT,
-  PAGE_TITLE,
-  SUB_TEXT,
-  TLD,
-  TWITTER_HANDLE,
-} from './constants';
+import { PAGE_TITLE, SUB_TEXT, TLD } from './constants';
 import { useDocumentTitle } from '@uidotdev/usehooks';
 import { useAccount } from 'wagmi';
+import { useCoolBackground } from './hooks/useCoolBackground';
 
 function App() {
   useDocumentTitle(PAGE_TITLE);
   const { address } = useAccount();
+  const color = useCoolBackground();
 
   return (
-    <div className="h-screen flex">
+    <div className={cn('h-screen flex transition duration-1000', color)}>
       <div className="flex-col justify-between items-center flex max-w-7xl mx-auto gap-10 w-full pt-3">
         <nav className="w-full flex justify-between gap-2 px-4 sm:px-8 py-2 items-center">
-          <img className="w-36" src={brandLogo} />
+          <img className="px-4 h-12" src={avatar} />
           <div className="flex items-center gap-8">
             {address && (
               <a
@@ -35,19 +33,19 @@ function App() {
         </nav>
         <section className="flex-grow w-full flex flex-col items-center p-4 gap-4 text-center">
           <div className="text-neutral-950 text-4xl lg:text-5xl font-extrabold leading-none tracking-tight mt-2">
-            {HERO_TEXT}
+            <img src={brandLogo} className="w-[80vw] md:w-[600px]" />
           </div>
           <div className="text-neutral-500 text-xl lg:text-2xl font-medium leading-normal tracking-tight">
             {SUB_TEXT}
           </div>
-          <div className="w-full flex-1 pt-10 max-w-xl text-left">
+          <div className="w-full flex-1 pt-10 max-w-2xl text-left">
             <Search />
           </div>
         </section>
         <footer className="w-full mx-auto px-4 sm:px-8 mb-4">
           <div className="border-t w-full px-3 border-neutral-300 flex flex-col sm:flex-row sm:justify-between gap-4 pt-5 pb-6">
-          <ul className="flex items-center gap-8 text-neutral-500 text-[13px] font-medium uppercase">
-            <li>
+            <ul className="flex items-center gap-8 text-neutral-500 text-[13px] font-medium uppercase">
+              {/* <li>
               <a
                 className="hover:text-neutral-700"
                 href={`https://twitter.com/${TWITTER_HANDLE}`}
@@ -55,34 +53,34 @@ function App() {
               >
                 Twitter
               </a>
-            </li>
-            <li>
-              <a
-                className="hover:text-neutral-700"
-                href="https://github.com/namebasehq/wallet-id"
-                target="_blank"
-              >
-                GitHub
+            </li> */}
+              <li>
+                <a
+                  className="hover:text-neutral-700"
+                  href="https://github.com/falci/3digitsclub"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-neutral-700"
+                  href={`https://opensea.io/collection/handshake-slds?search[stringTraits][0][name]=TLD&search[stringTraits][0][values][0]=${TLD}`}
+                  target="_blank"
+                >
+                  OpenSea
+                </a>
+              </li>
+            </ul>
+            <div className="flex items-center gap-3">
+              <div className="text-neutral-500 text-[11px] font-semibold opacity-50 uppercase">
+                powered by
+              </div>
+              <a href="https://hns.id" target="_blank">
+                <img src={hnsLogo} className="w-24" />
               </a>
-            </li>
-            <li>
-              <a
-                className="hover:text-neutral-700"
-                href={`https://opensea.io/collection/handshake-slds?search[stringTraits][0][name]=TLD&search[stringTraits][0][values][0]=${TLD}`}
-                target="_blank"
-              >
-                OpenSea
-              </a>
-            </li>
-          </ul>
-          <div className="flex items-center gap-3">
-            <div className="text-neutral-500 text-[11px] font-semibold opacity-50 uppercase">
-              powered by
             </div>
-            <a href="https://hns.id" target="_blank">
-              <img src={hnsLogo} className="w-24" />
-            </a>
-          </div>
           </div>
         </footer>
       </div>

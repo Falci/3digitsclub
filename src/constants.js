@@ -1,18 +1,17 @@
-export const DEV_MODE = location.hostname === 'localhost';
+export const DEV_MODE = false && location.hostname === 'localhost';
 // export const DEV_MODE = false;
 
-export const TLD = 'wallet';
+export const TLD = '3digitsclub';
 
-export const HERO_TEXT = 'Own your .' + TLD;
 export const SUB_TEXT = 'Decentralized domains for websites, wallets and web3';
 export const SEARCH_PLACEHOLDER = 'Find your .' + TLD;
-export const PAGE_TITLE = HERO_TEXT;
+export const PAGE_TITLE = 'Be part of .3DigitsClub';
 
-export const TWITTER_HANDLE = 'walletdomain';
+// export const TWITTER_HANDLE = 'walletdomain';
 
 // Check https://cloud.walletconnect.com/
-export const WALLET_CONNECT_APP_NAME = 'Wallet.id';
-export const WALLET_CONNECT_PROJECT_ID = 'b29f96b2f68f4ce904f96b3c225845c3';
+export const WALLET_CONNECT_APP_NAME = '.3DigitsClub';
+export const WALLET_CONNECT_PROJECT_ID = 'f466be1e836997ab63718affd9ca42f5';
 
 export const STATUS_CONTRACT_ADDR = DEV_MODE
   ? '0x075489a52BcF5cd91c589046C3F5807e7fFC3647'
